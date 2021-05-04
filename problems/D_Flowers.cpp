@@ -45,39 +45,30 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-int n , k  , ko ,arr[110];
-multiset<pair<int , int>> mset;
-vector<pair<int,int>> vec;
+const int  modulo = 1e9+7 , N = 1e5+9;
+ll t , k ,a ,b , dp[N] , dp_sum[N+10];
+
 int main(){
     fast_cin();
-    cin>>n>>k;
-    ko=k;
-    for(int i = 1 ; i <= n ; i ++){
-        cin>>arr[i];
-        mset.insert(make_pair(arr[i], i ));
+    cin>>t>>k;
+
+    for(int i =1 ; i < k ; i ++) dp[i] =1;
+    dp[k] =2;
+    for(int i = k+1 ; i <=N ; i ++){
+        dp[i] = dp[i-1] + dp[i-k];
+        dp[i] %= modulo;
     }
 
-    while(k--){
-        if((*mset.begin()).first == (*--mset.end()).first || abs((*mset.begin()).first - (*--mset.end()).first) == 1){
-            break;
-        }
-        vec.push_back(make_pair( (*--mset.end()).second , (*mset.begin()).second ));
-        pair<int,int> f = (*mset.begin());
-        pair<int,int> s = (*--mset.end());
-        f.first++;
-        s.first--;
-        mset.erase(mset.begin());
-        mset.erase(--mset.end());
-        mset.insert(f);
-        mset.insert(s);
+    for(int i = 2 ; i <= N ; i ++){
+        dp[i] += dp[i-1];
+        // dp[i] %= modulo;
     }
 
-    cout<<(*--mset.end()).first-(*mset.begin()).first<<" "<<vec.size()<<endl;
-    for(auto it:vec){
-        cout<<it.first<<" "<<it.second<<endl;
+    while(t--){
+        cin>>a>>b;
+        cout<<(dp[b] - dp[a-1])%modulo<<endl;
+        
     }
-
-    
 
 
     return 0;
