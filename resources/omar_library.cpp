@@ -9,7 +9,8 @@ typedef pair<int, int> pi;
 const int N = 100;
 const int oo = INT_MAX;
 int input[N], segment_tree[N * 4];
-vector<int> adj[N];
+vector<int> adj_graph[N];
+bool visited_nodes[N];
 vector<pi> adj_weighted[N];
 vector<pair<pi, int>> edges;
 int cost[N], n, m;
@@ -101,6 +102,39 @@ bool bellman(int source) {
   return true; // no negative cycles found
 }
 // end bellman
+//==========================================================================
+// dfs
+// O(V+E)
+//==========================================================================
+void dfs(int current_node , int parent =0) { // takes source
+  visited_nodes[current_node] = true; //mark visited 
+  for(auto adj_node : adj_graph[current_node]){ // loop over children
+    if(!visited_nodes[adj_node]){ // if not visited before
+      dfs(adj_node , current_node); // dfs into it
+    }
+  }
+}
+// end dfs
+//==========================================================================
+// bfs
+// O(V+E)
+//==========================================================================
+void bfs(int node){ // takes source
+  visited_nodes[node] = true; // mark visited
+  queue<int> q;
+  q.push(node);
+  while(!q.empty()){
+    node = q.front();
+    q.pop();
+    for(auto child : adj_graph[node]){
+      if(!visited_nodes[child]){
+        q.push(child);
+        visited_nodes[child] = true;
+      }
+    }
+  }
+}
+// end dfs
 //==========================================================================
 
 int main() {
