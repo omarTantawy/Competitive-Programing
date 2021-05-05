@@ -105,12 +105,15 @@ bool bellman(int source) {
 //==========================================================================
 // dfs
 // O(V+E)
+// apps : connected components , lexic shortest path , time in and out , get
+// ancestors
+// can't : shortest path
 //==========================================================================
-void dfs(int current_node , int parent =0) { // takes source
-  visited_nodes[current_node] = true; //mark visited 
-  for(auto adj_node : adj_graph[current_node]){ // loop over children
-    if(!visited_nodes[adj_node]){ // if not visited before
-      dfs(adj_node , current_node); // dfs into it
+void dfs(int current_node, int parent = 0) {      // takes source
+  visited_nodes[current_node] = true;             // mark visited
+  for (auto adj_node : adj_graph[current_node]) { // loop over children
+    if (!visited_nodes[adj_node]) {               // if not visited before
+      dfs(adj_node, current_node);                // dfs into it
     }
   }
 }
@@ -118,23 +121,25 @@ void dfs(int current_node , int parent =0) { // takes source
 //==========================================================================
 // bfs
 // O(V+E)
+// apps : connected components , shortest path
+// can't :
 //==========================================================================
-void bfs(int node){ // takes source
-  visited_nodes[node] = true; // mark visited
-  queue<int> q;
-  q.push(node);
-  while(!q.empty()){
-    node = q.front();
-    q.pop();
-    for(auto child : adj_graph[node]){
-      if(!visited_nodes[child]){
-        q.push(child);
-        visited_nodes[child] = true;
+void bfs(int node) {                     // takes source
+  visited_nodes[node] = true;            // mark visited
+  queue<int> q;                          // to check children queue
+  q.push(node);                          // push sourse
+  while (!q.empty()) {                   // while no children to check
+    node = q.front();                    // get top node
+    q.pop();                             // remove it
+    for (auto child : adj_graph[node]) { // loop over all its children
+      if (!visited_nodes[child]) {       // if not visited before
+        q.push(child);                   // push to check its neighbours
+        visited_nodes[child] = true;     // mark visited to avoid visting again
       }
     }
   }
 }
-// end dfs
+// end bfs
 //==========================================================================
 
 int main() {

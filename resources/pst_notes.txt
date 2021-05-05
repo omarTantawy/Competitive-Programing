@@ -1,0 +1,6 @@
+session #13 : Graphs 2
+    dfs and bfs applications
+        -tree is connected graph with N nodes and N-1 edges
+        -ancestors of node x
+        -is y ancestor of x
+        - in-time  while dfs , out-time while dfs to get ancestors
