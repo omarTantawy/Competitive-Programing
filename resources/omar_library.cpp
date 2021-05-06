@@ -141,6 +141,22 @@ void bfs(int node) {                     // takes source
 }
 // end bfs
 //==========================================================================
+//start topological sort
+// O(V+E)
+// replace max with problem
+//==========================================================================
+int topological(pi node){ // called with {source , 0}
+  if(visited_nodes[node.first])// if this node is visted before
+    return ans[node.first]; // return saved answer
+  vis[node.first] = true; // mark visited
+  for(auto child : adj_weighted[node.first]){ // loop over its children
+    ans[node.first] = max(ans[node.first] , dfs(child)); // get max value path (dep on problem)
+  }
+  ans[node] += node.second; // add my time to reach me
+  return ans[node]; // return ans 
+}
+//end topological sort
+//==========================================================================
 
 int main() {
   fast_cin();

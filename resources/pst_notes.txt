@@ -4,3 +4,7 @@ session #13 : Graphs 2
         -ancestors of node x
         -is y ancestor of x
         - in-time  while dfs , out-time while dfs to get ancestors
+        - is ancestor if in[x] <= in[y] && in[y] <= out[x]
+        - get all nodes under x node
+        - DAG -> directed acyclyc graph
+        - topological sorting : flip graph edges , save answer of visited vertex
