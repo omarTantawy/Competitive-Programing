@@ -8,3 +8,6 @@ session #13 : Graphs 2
         - get all nodes under x node
         - DAG -> directed acyclyc graph
         - topological sorting : flip graph edges , save answer of visited vertex
+        - detect cycles using dfs and bfs
+        - directed -> keep current nodes stack and check if visited one of them again || use edge and if visited 1 edge more than once then cycle
+        - undirected is always have cycles , but if we defined cycles as path > 2, so check if node != parent

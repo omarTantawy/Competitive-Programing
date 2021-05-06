@@ -157,6 +157,21 @@ int topological(pi node){ // called with {source , 0}
 }
 //end topological sort
 //==========================================================================
+// dfs a tree
+// O(V+E)
+//==========================================================================
+int timer =0;
+void dfs_tree(int current_node, int parent = 0) {      // takes source
+  in[current_node] = ++timer;
+  for (auto adj_node : adj_graph[current_node]) { // loop over children
+    if (adj_node  != parent) {               // if not visited before
+      dfs_tree(adj_node, current_node);                // dfs into it
+    }
+  }
+  out[current_node] = timer;
+}
+// end dfs
+//==========================================================================
 
 int main() {
   fast_cin();
